@@ -1,0 +1,118 @@
+﻿@model IEnumerable<AirBnb.Models.Phong>
+
+
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*HOMEPAGE*@
+<main>
+
+    @*Slider place view filter*@
+    @Html.Action("GetCategories", "Home")
+
+
+
+
+    @* PRICE SLIDER *@
+    @Html.Action("PriceSlider", "Home")
+
+
+
+
+    <div class="d-flex align-items-center justify-content-between" style="margin-top: 100px; margin-bottom: 75px;">
+        <div class="content">
+            <div class="content__container">
+                <p class="content__container__text">
+                    Your
+                </p>
+
+                <ul class="content__container__list">
+                    <li class="content__container__list__item primaryColor">Choices !</li>
+                    <li class="content__container__list__item primaryColor">Joys !</li>
+                </ul>
+            </div>
+        </div>
+
+        @if (ViewBag.NumberOfRooms == null)
+        {
+
+
+            <span></span>
+        }
+        else if (ViewBag.NumberOfRooms == 1)
+        {
+            <span id="numberOfRooms" class="text-white bg-success p-1  fw-medium rounded-2">@ViewBag.NumberOfRooms Room Available</span>
+        }
+        else
+        {
+            <span id="numberOfRooms" class="text-white bg-success p-1  fw-medium rounded-2">@ViewBag.NumberOfRooms Rooms Available</span>
+        }
+
+    </div>
+
+
+
+
+    <div class="placeList mb-4">
+        @foreach (var item in Model)
+        {
+
+            <a href=" @Url.Action("Detail", "Room", new { name = item.TieuDe })" class="placeFrame ">
+                <div class="slider-frame mx-auto mx-md-0">
+                    <div class="slide-images">
+                        <div class="img-container">
+                            <img src="@item.HinhAnh1" class="img">
+                        </div>
+
+                        <div class="img-container">
+                            <img src="@item.HinhAnh2" class="img">
+                        </div>
+                        <div class="img-container">
+                            <img src="@item.HinhAnh3" class="img">
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-2 fw-medium fs-5 text-black" style="width: 100%;">
+
+                    <div class="text-truncate">@item.TieuDe</div>
+                </div>
+
+
+                <div class="d-flex TypeAndRating my-2 text-black-50">
+                    <p>@item.DanhMucPhong.TenDanhMuc</p>
+                    <p class="PRating">
+
+                        @* Hiển thị trạng thái phòng *@
+                        @if (item.TinhTrang)
+                        {
+                            <span style="font-size: 12px;" class="text-white bg-danger p-2  fw-medium rounded-2">Booked</span>
+                        }
+                        else
+                        {
+                            <span style="font-size: 12px;" class="text-white bg-success p-2  fw-medium rounded-2">Available</span>
+                        }
+
+
+                    </p>
+                </div>
+
+                <div class="d-flex text-black">
+                    <span class=" fw-bold primaryColor">  $@item.Gia1Ngay.ToString("0")</span>
+                    <span> / night</span>
+                </div>
+            </a>
+        }
+
+
+
+
+    </div>
+
+
+
+
+</main>
+
+

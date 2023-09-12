@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1aed3705e5ba4d72a67799ea1f5cea9a" Name="Diagram1">
+        <EntityTypeShape EntityType="AirbnbModel.ChuNha" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AirbnbModel.DanhGia" Width="1.5" PointX="5.25" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AirbnbModel.DanhMucPhong" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AirbnbModel.DonDatPhong" Width="1.5" PointX="8.25" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AirbnbModel.HoaDon" Width="1.5" PointX="10.5" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AirbnbModel.KhachThue" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="AirbnbModel.KhuyenMai" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AirbnbModel.Phong" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AirbnbModel.YeuThich" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />
+        <AssociationConnector Association="AirbnbModel.FK__Phong__MaChuNha__30F848ED" ManuallyRouted="false" />
+        <AssociationConnector Association="AirbnbModel.FK__DanhGia__MaKH__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="AirbnbModel.FK__DanhGia__MaPhong__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="AirbnbModel.FK__Phong__MaDanhMuc__300424B4" ManuallyRouted="false" />
+        <AssociationConnector Association="AirbnbModel.FK__DonDatPho__MaPho__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="AirbnbModel.FK__DonDatPhon__MaKH__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="AirbnbModel.FK__HoaDon__MaDon__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="AirbnbModel.FK__HoaDon__MaKH__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="AirbnbModel.FK__YeuThich__MaKH__36B12243" ManuallyRouted="false" />
+        <AssociationConnector Association="AirbnbModel.FK__Phong__MaKM__31EC6D26" ManuallyRouted="false" />
+        <AssociationConnector Association="AirbnbModel.FK__YeuThich__MaPhon__35BCFE0A" ManuallyRouted="false" />
+        <AssociationConnector Association="AirbnbModel.FK_KhuyenMai_ChuNha" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

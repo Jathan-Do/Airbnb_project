@@ -1,0 +1,409 @@
+﻿@using AirBnb.Models;
+@using AirBnb.Controllers;
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .favorite-heart-active {
+        stroke: red;
+        fill: red;
+    }
+</style>
+
+<main class="my-4">
+    <section>
+        <h2>@Model.TieuDe</h2>
+        <div class=" d-flex justify-content-between">
+            @*Host name*@
+            <div class="d-flex flex-md-row flex-column gap-4">
+
+                <div class="d-flex align-items-center gap-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="#ff5f63" d="M10 20H6q-.425 0-.713-.288T5 19v-7H3.3q-.35 0-.475-.325t.15-.55l8.35-7.525q.275-.275.675-.275t.675.275L16 6.6V5q0-.425.288-.713T17 4h1q.425 0 .713.288T19 5v4.3l2.025 1.825q.275.225.15.55T20.7 12H19v7q0 .425-.288.713T18 20h-4v-5q0-.425-.288-.713T13 14h-2q-.425 0-.713.288T10 15v5Zm0-9.975h4q0-.8-.6-1.313T12 8.2q-.8 0-1.4.513t-.6 1.312Z" /></svg>
+                    <p>@Model.ChuNha.Ten</p>
+                </div>
+
+
+                <div class="d-flex align-items-center gap-1 ">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="#ff5f63" d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4s4-1.79 4-4s-1.79-4-4-4zm8.94 3A8.994 8.994 0 0 0 13 3.06V1h-2v2.06A8.994 8.994 0 0 0 3.06 11H1v2h2.06A8.994 8.994 0 0 0 11 20.94V23h2v-2.06A8.994 8.994 0 0 0 20.94 13H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7s7 3.13 7 7s-3.13 7-7 7z" /></svg>
+                    <p>
+                        @Model.DiaChi
+                    </p>
+                </div>
+
+            </div>
+            <div class="flex-md-row flex-column">
+
+
+
+                @*@Favorite Button*@
+                <div class="col">
+                    <div class="parent">
+                        <div class="child">
+                            @using (Html.BeginForm("AddToFavorites", "User", FormMethod.Post))
+                            {
+                                <input id="favorite" type="hidden" name="MaPhong" value="@Model.MaPhong" />
+                                <button type="submit" class="favorite-button border-0 rounded-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ff5f63" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart">
+                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                                    </svg>
+                                </button>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+
+    </section>
+
+    @*Grid Room Image*@
+    <section class="mx-auto my-5 ">
+        <div class="d-flex gap-3 flex-wrap mx-auto mx-md-0 justify-content-center ">
+            <div class=" room-grid">
+                <img width="550" height="400" class="object-fit-cover" src="@Model.HinhAnh1" alt="1" />
+            </div>
+            <div class="d-flex gap-4 overflow-hidden"
+                 style="border-top-right-radius: 40px; border-bottom-right-radius: 40px;">
+                <div class="d-flex flex-column row-gap-1">
+                    <div class="">
+                        <img class="object-fit-cover mini-room-image" src="@Model.HinhAnh2" alt="1" />
+                    </div>
+
+                    <div class="">
+                        <img class="object-fit-cover mini-room-image" src="@Model.HinhAnh3" alt="1" />
+                    </div>
+                </div>
+
+                <div class="d-flex flex-column row-gap-1">
+                    <div class="">
+                        <img class="object-fit-cover mini-room-image " src="@Model.HinhAnh4" alt="1" />
+                    </div>
+
+                    <div class="">
+                        <img class="object-fit-cover mini-room-image" src="@Model.HinhAnh5" alt="1" />
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    @*DETAIL BODY*@
+    <section class="my-5">
+        <div class="row  flex-column-reverse flex-lg-row gap-md-4 align-items-center justify-content-center align-items-md-start justify-content-md-start ">
+            <div class="col-lg-7 col px-2 ">
+                <div class="d-flex align-items-center justify-content-between bg-body py-4 border-custom-bottom">
+                    <div class="d-flex flex-column ">
+                        <p class="fw-bold fs-4">
+                            House hosted by @Model.ChuNha.Ten
+                        </p>
+                        <p class="text-black-50">
+                            @Model.SLKhach guests - 1 bedroom - 1 bed - 1 bath
+                        </p>
+                    </div>
+                    <a data-toggle="tooltip" data-placement="top" title="@Model.ChuNha.Ten" href="@Url.Action("About", "User", new { hostName = Model.ChuNha.Ten })">
+                        <img width="55" height="55" class="object-fit-cover rounded-circle" src="~/Assets/Images/no-avatar.png" alt="Alternate Text" />
+                    </a>
+
+                </div>
+
+
+                @*Description*@
+                <div class="py-3">
+                    <p class="text-description ">
+                        @Model.MoTa
+
+                    </p>
+                </div>
+                @{ var tk = Session["KhachThue"] as AirBnb.Models.KhachThue;}
+
+                @*Comment*@
+                <div class="container my-4">
+                    <div class="row height d-flex justify-content-center align-items-center">
+                        <div class="col px-md-0">
+                            <div>
+                                <div class="p-3">
+                                    <h6 class="primaryColor fw-bold fs-4">Reviews</h6>
+                                </div>
+
+                                <div class="rounded-2 mt-3 d-flex flex-row gap-2 align-items-center p-3 form-color">
+                                    <img src="~/Assets/Images/no-avatar.png" width="50" class="rounded-circle mr-2">
+                                    @if (tk != null)
+                                    {
+                                        <form class=" d-flex flex-row gap-2 align-items-center p-3" action="@Url.Action("AddComment", "Room")" method="post">
+                                            <!-- Your hidden input fields and textarea here -->
+                                            <input type="hidden" name="MaPhong" value="@Model.MaPhong" />
+                                            <input type="hidden" name="MaKH" value="@tk.MaKH" />
+                                            <input type="hidden" name="TieuDe" value="@Model.TieuDe" />
+                                            <textarea rows="4" cols="30" class="comment-section" name="comment" placeholder="Enter your comment..."></textarea>
+                                            <button style="width: 50px; padding: 0;" class="btn login-btn" type="submit">
+                                                <i class="fa-solid fa-paper-plane"></i>
+                                            </button>
+                                        </form>
+                                    }
+                                    else
+                                    {
+                                        <p class="primaryColor fw-bold ">Please <a class="text-decoration-underline" href="@Url.Action("SignIn","Home")">log in</a>  to leave a comment.</p>
+                                        <!-- You may also provide a login link here -->
+                                    }
+                                </div>
+
+
+
+                                <div class="mt-2">
+                                    @foreach (var binhLuan in ViewBag.CommentList)
+                                    {
+                                        <div class="d-flex flex-row p-3 gap-4">
+                                            <img src="https://source.unsplash.com/random" width="32" height="32" class="rounded-circle mr-3">
+                                            <div class="w-100">
+                                                <div class="d-flex flex-column">
+                                                    <div class="d-flex flex-row align-items-center gap-3 ">
+                                                        <span class="mr-2 fw-medium fs-6">@binhLuan.KhachThue.Ten</span>
+
+
+                                                        <small class="c-badge">Top Comment</small>
+
+                                                    </div>
+
+                                                    <small style="font-size: 12px" class="fw-lighter opacity-50">@binhLuan.NgayBL</small>
+                                                </div>
+                                                <!-- (2) Hiển thị nội dung bình luận -->
+                                                <p class="text-justify comment-text my-2">@binhLuan.NoiDung</p>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            @*Price detail*@
+
+            @*@if (Model.TinhTrang)
+                {
+
+                    <div class="col-lg-4 p-4 room-checkout-booked d-flex flex-column align-items-center justify-content-center position-relative mx-auto ">
+                        <p class="text-center fw-bold fs-4 text-white">Room was booked !</p>
+                        <span class="fw-bolder fs-3 my-4 ">
+                            <span class="fw-bolder text-white">$@Model.Gia1Ngay.ToString("0")</span>
+                            <span class="fw-lighter fs-5  ">night</span>
+                        </span>
+
+                        <a class="text-white border-white btn btn-outline-dark" href="@Url.Action("Index","Home")">Choose another rooms</a>
+                    </div>
+                }
+                else
+                {*@
+            <div class="col-lg-4 p-4 room-checkout position-relative mx-auto  ">
+                <form method="post" action="@Url.Action("AddToReservations", "User")" onsubmit="return validateForm()">
+                    <div class="d-flex justify-content-between">
+                        <span class="fw-bolder fs-3 ">
+                            <span class="primaryColor">$@Model.Gia1Ngay.ToString("0")</span>
+                            <span class="fw-lighter fs-5 ">night</span>
+                        </span>
+                    </div>
+
+                    <div class="my-2">Guest:</div>
+                    <div class="input-group my-2">
+                        <select class="form-select" name="guests" id="guestSelect" aria-label="Example select with button addon">
+                            <option selected>Select ..</option>
+                            @for (int i = 1; i <= Model.SLKhach; i++)
+                            {
+                                <option value="@i">@i</option>
+                            }
+                        </select>
+                    </div>
+
+
+                    @*Date Picker*@
+
+
+                    <div class="d-flex justify-content-between column-gap-2 my-3">
+                        <input placeholder="Start Date" type="date" id="start" name="start" value="" min="@Model.NgayBatDau.ToString("yyyy-MM-dd")" max="@Model.NgayKetThuc.ToString("yyyy-MM-dd")" />
+                        <input placeholder="End Date" type="date" id="end" name="end" value="" min="@Model.NgayKetThuc.ToString("yyyy-MM-dd")" max="@Model.NgayKetThuc.ToString("yyyy-MM-dd")" />
+                    </div>
+
+
+
+
+
+                    @*Price and Fees*@
+                    <div class="my-4">
+                        <div class="d-flex justify-content-between mb-4  ">
+                            <p id="numNights" class="text-black-50 fw-bold"> </p>
+                            <p class=" fw-bold primaryColor" id="priceByNights"></p>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-4  text-black-50">
+                            <p class="text-black-50 fw-bold">Airbnb Service Fee</p>
+                            <p class=" fw-bold primaryColor">15$</p>
+                        </div>
+
+                        <div class="d-flex justify-content-between pb-4 text-black-50 border-bottom">
+                            <p class="text-black-50 fw-bold">Cleaning Fee</p>
+                            <p class=" fw-bold primaryColor">5$</p>
+                        </div>
+
+                        @*TOTAL FEE*@
+                        <div class="d-flex justify-content-between pt-2 text-black-50 ">
+                            <p class="fw-bold fs-4 primaryColor">Total Fee</p>
+                            <p class=" fw-bold primaryColor fs-4" id="totalFee">$20</p>
+                        </div>
+
+                    </div>
+                    <input type="hidden" name="MaPhong" value="@Model.MaPhong" />
+                    <input type="hidden" id="pricePerNight" value="@Model.Gia1Ngay" />
+
+
+                    @*Button*@
+                    <button type="submit" class="btn-reserve position-absolute fixed-bottom  border-0 " href="#">Reserve</button>
+
+
+                </form>
+            </div>
+
+            @*}*@
+
+
+        </div>
+    </section>
+
+
+
+
+</main>
+
+
+<script>
+    // Lấy đối tượng ngày bắt đầu và ngày kết thúc từ DOM
+    const startDateInput = document.getElementById("start");
+    const endDateInput = document.getElementById("end");
+
+    // Thêm sự kiện onchange cho ngày bắt đầu
+    startDateInput.addEventListener("change", function () {
+        // Chuyển đổi giá trị ngày bắt đầu thành đối tượng Date
+        const startDate = new Date(startDateInput.value);
+
+        // Tính ngày kết thúc là ngày bắt đầu + 1
+        const nextDay = new Date(startDate);
+        nextDay.setDate(startDate.getDate() + 1);
+
+        // Đặt giá trị tối thiểu cho ngày kết thúc là ngày bắt đầu + 1
+        const minEndDate = nextDay.toISOString().split('T')[0];
+        endDateInput.min = minEndDate;
+
+        // Nếu ngày kết thúc hiện tại nhỏ hơn giá trị tối thiểu, đặt lại ngày kết thúc thành giá trị tối thiểu
+        if (new Date(endDateInput.value) < nextDay) {
+            endDateInput.value = minEndDate;
+        }
+    });
+    //---------------------------------------------------------------------------
+
+
+    document.getElementById("start").addEventListener("change", updateNumNights);
+    document.getElementById("end").addEventListener("change", updateNumNights);
+    //Render số ngày từ ô chọn ngày bd,kt
+    function updateNumNights() {
+
+        var startDate = document.getElementById("start").value;
+        var endDate = document.getElementById("end").value;
+
+        if (startDate === "" || endDate === "") {
+            // ĐK 1 trong 2 chưa được chọn giá tr
+            var numNightsElement = document.getElementById("numNights");
+            numNightsElement.innerText = "";
+            return;
+        }
+
+        // Nếu cả 2 có giá trị thì cập nhật lại
+        startDate = new Date(startDate);
+        endDate = new Date(endDate);
+
+        // Tính số ngày
+        var numNights = (endDate - startDate) / (1000 * 60 * 60 * 24);
+
+        // Hiển thị số ngày
+        var numNightsElement = document.getElementById("numNights");
+        numNightsElement.innerText = numNights + " nights";
+        calculateTotalFee();
+
+    }
+
+    //---------------------------------------------------------------------------
+
+    // Check null ô ngày bắt đầu, kết thúc và ô select số lượng khách
+    function validateForm() {
+        var startDate = document.getElementById("start").value;
+        var endDate = document.getElementById("end").value;
+        var guestSelection = document.getElementById("guestSelect").value;
+
+        // Check đk ô bắt đầu và kết thúc
+        if (startDate === "" || endDate === "") {
+            showCustomAlert("Please select both start and end dates.");
+            return false; // Tránh submit form
+        }
+
+        // Check đk ô select số lượng khách
+        if (guestSelection === "Select ..") {
+            showCustomAlert("Please choose the quantity of guest.");
+            return false; // Tránh submit form
+        }
+        calculateTotalFee();
+
+
+        return true; // Cho submit nếu đk đúng
+    }
+
+    //---------------------------------------------------------------------------
+
+
+    //Hiển thị tổng chi phí
+    function calculateTotalFee() {
+
+
+        //Lấy ngày
+        var startDate = new Date(document.getElementById("start").value);
+        var endDate = new Date(document.getElementById("end").value);
+
+        var timeOneDay = 24 * 60 * 60 * 1000; // Hiển thị tổng thời gian 1 ngày theo miliseconds
+        var numNightsValue = Math.round((endDate - startDate) / timeOneDay);
+
+        // Nhận giá trị giá của 1 ngày
+        var pricePerNight = parseFloat(document.getElementById("pricePerNight").value);
+        //Cập nhật giá trị giá theo số ngày
+        document.getElementById("priceByNights").innerText = "$" + pricePerNight * numNightsValue;
+
+
+        //Phí dịch vụ mặc định
+        var serviceFee = 15;
+        var cleaningFee = 5;
+
+        //Tính tổng giá
+        var totalFee = pricePerNight * numNightsValue + serviceFee + cleaningFee;
+        //Hiển thị kết quả
+        document.getElementById("totalFee").innerText = "$" + totalFee;
+    }
+
+
+    //---------------------------------------------------------------------------
+    //Disable bảng giá khi phòng trong trạng thái Booked
+
+
+</script>

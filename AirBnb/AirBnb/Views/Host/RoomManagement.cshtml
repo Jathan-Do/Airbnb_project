@@ -1,0 +1,88 @@
+﻿@model IEnumerable<AirBnb.Models.Phong>
+
+@{
+    ViewBag.Title = "Room Management";
+    Layout = "~/Views/Shared/_HostLayout.cshtml";
+}
+
+
+<div class="container-fluid">
+
+    <h2 class="primaryColor fs-2 fw-bold my-4 text-center">Room Management</h2>
+    <p class="bg-body my-4">
+        @Html.ActionLink("Create New", "CreateRoom", null, new { @class = "text-white fs-5 fw-bold bg-primary p-2 rounded-2" })
+        <hr class="primaryColor opacity-100" />
+    </p>
+
+    @if (ViewBag.Message != null)
+    {
+
+        <p class="d-flex align-items-center justify-content-center text-danger fw-bolder fs-2">@ViewBag.Message</p>
+
+
+
+    }
+    else
+    {
+
+        <div class="placeList">
+            @foreach (var item in Model)
+            {
+
+                <div href="#" class="placeFrame">
+                    <div class="d-flex align-items-center justify-content-center gap-4">
+                        @Html.ActionLink("Edit", "EditRoom", new { id = item.MaPhong }, new { @class = "text-danger" })
+
+
+
+                        <form method="post" action="@Url.Action("DeleteRoom", "Host", new { id = item.MaPhong })" onsubmit="return confirm('Are you sure you want to delete this room?');">
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="btn text-danger">
+                                <i class="fa-solid fa-xmark"></i>
+                                Delete
+                            </button>
+
+                        </form>
+
+
+
+                    </div>
+                    <div class="slider-frame mx-auto mx-md-0">
+
+                        <div class="">
+                            <img src="@item.HinhAnh1" class="img">
+                        </div>
+
+
+                    </div>
+                    <div class="mt-2 fw-medium fs-5 text-black" style="width: 100%;">
+
+                        <div class="text-truncate">@item.TieuDe</div>
+                    </div>
+
+                    <div class="d-flex TypeAndRating mt-2 text-black-50">
+                        <p>@item.DanhMucPhong.TenDanhMuc</p>
+                        <p class="PRating"><i class="fa-solid fa-star"></i> Good</p>
+                    </div>
+
+                    <div class="d-flex text-black">
+                        <span class=" fw-bold">
+
+                            $@item.Gia1Ngay.ToString("0")
+                        </span>
+                        <span> / night</span>
+                    </div>
+                </div>
+
+
+
+
+            }
+        </div>
+
+
+
+    }
+</div>
+
+
